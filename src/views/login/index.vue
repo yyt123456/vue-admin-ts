@@ -4,25 +4,26 @@
       <a-form name="custom-validation" ref="formRef" v-bind="layout">
         <a-form-item name="age" autocomplete="off">
           <label>用户名</label>
-          <a-input type="text" style="width: 285px"/>
+          <a-input type="text" style="width: 300px"/>
         </a-form-item>
         <a-form-item name="pass">
           <label>密码</label>
-          <a-input type="password" autocomplete="off" style="width: 285px"/>
+          <a-input type="password" autocomplete="off" style="width: 300px"/>
         </a-form-item>
         <a-form-item>
-          <a-button type="primary" html-type="submit" block style="width: 285px"
+          <a-button type="primary" html-type="submit" block style="width: 300px"
           >登录
           </a-button
           >
         </a-form-item>
+
         <a-form-item>
-          <div id="captcha-dom"></div>
+          <Captcha></Captcha>
         </a-form-item>
       </a-form>
       <div class="center fs-12">
         <a href="" class="white">忘记密码</a> |
-        <a href="" class="white">注册</a>
+        <router-link to="/register" class="white">注册</router-link>
       </div>
     </div>
   </div>
@@ -30,12 +31,14 @@
 
 <script lang="ts">
   import {defineComponent, toRefs, reactive} from "vue";
-  import "./js/captcha";
+  import Captcha from "../../components/Captcha/index.vue";
 
   export default defineComponent({
     name: "Login",
-    components: {},
-    setup(props) {
+    components: {
+      Captcha
+    },
+    setup() {
       const initData = reactive({
         layout: {
           labelCol: {span: 4},
@@ -43,7 +46,6 @@
         }
       })
       const data = toRefs(initData)
-
       return {
         ...data
       };
